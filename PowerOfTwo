@@ -1,0 +1,19 @@
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+       int lo=0;
+       int hi=n;
+       while(lo<=hi){
+           int mid=(lo+hi)/2;
+           if(Math.pow(2,mid)==n){
+               return true;
+           }
+           else if(Math.pow(2,mid)>=n){
+               hi=mid-1;
+           }
+           else{
+               lo=mid+1;
+           }
+       }
+       return false;
+    }
+}
