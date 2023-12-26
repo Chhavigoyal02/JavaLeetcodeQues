@@ -1,0 +1,21 @@
+class Solution {
+    public int addDigits(int num) {
+        if(num<10){
+            return num;
+        }
+        int sum=sumofdigits(num);
+        while(sum>=10){
+            sum=sumofdigits(sum);
+        }
+        return sum;
+    }
+    public static int sumofdigits(int num){
+        int sum=0;
+        while(num>0){
+            int x=num%10;
+            sum=sum+x;
+            num=num/10;
+        }
+        return sum;
+    }
+}
