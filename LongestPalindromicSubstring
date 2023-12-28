@@ -1,0 +1,28 @@
+class Solution {
+    public String longestPalindrome(String str) {
+        if(str == null || str.length() == 0) {
+	        return "";
+	    }
+        for(int len=str.length();len>=1;len--) {
+			for(int j=len;j<=str.length();j++) {
+				int i=j-len;
+				if(IsPalindrome(str.substring(i,j))){
+                    return str.substring(i,j);
+                }
+			}
+		}
+        return str;
+    }
+    public static boolean IsPalindrome(String str){
+        int left=0;
+		int right=str.length()-1;
+		while(left<=right) {
+			if(str.charAt(right)!=str.charAt(left)) {
+				return false;	
+			}
+            left++;
+			right--;
+		}
+        return true;
+	}
+}
