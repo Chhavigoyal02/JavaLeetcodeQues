@@ -1,0 +1,25 @@
+class Solution {
+    public int[] twoSum(int[] arr, int target) {
+        int[] res=new int[2];
+        int li=0;
+        int hi=arr.length-1;
+        int l=arr[0];
+        int h=arr[arr.length-1];
+        while(l<h){
+            l=arr[li];
+            h=arr[hi];
+            if(l+h==target){
+                res[0]=li+1;
+                res[1]=hi+1;
+                return res;
+            }
+            else if(l+h>target){
+                hi--;
+            }
+            else{
+                li++;
+            }
+        }
+        return res;
+    }
+}
