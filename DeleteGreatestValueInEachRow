@@ -1,0 +1,28 @@
+class Solution {
+    public int deleteGreatestValue(int[][] grid) {
+        for(int i=0;i<grid.length;i++){
+            Sort(grid[i]);
+        }
+        int sum=0;
+         for (int i = 0; i < grid[0].length; i++) {
+            int maxm = grid[0][i];
+            for (int j = 1; j < grid.length; j++)
+                if (grid[j][i] > maxm)
+                    maxm = grid[j][i];
+ 
+            sum=sum+maxm;
+        }
+        return sum;
+    }
+    public static void Sort(int[] mat) {
+		for(int turn=1; turn < mat.length; turn++) {
+			for(int i=0; i < mat.length-turn; i++) {
+				if(mat[i] > mat[i+1] ){
+					int temp = mat[i];
+					mat[i] = mat[i+1];
+					mat[i+1] = temp;
+				}
+			}
+		}
+	}
+}
