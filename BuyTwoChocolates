@@ -1,0 +1,17 @@
+class Solution {
+    public int buyChoco(int[] prices, int money) {
+        int ans=Integer.MAX_VALUE;
+        for(int i=0;i<prices.length;i++){
+            for(int j=i+1;j<prices.length;j++){
+                int diff=prices[i]+prices[j];
+                ans=Math.min(diff,ans);
+            }
+        }
+        if(ans>money){
+            return money;
+        }
+        else{
+            return money-ans;
+        }
+    }
+}
