@@ -1,0 +1,17 @@
+class Solution {
+    public boolean isGood(int[] nums) {
+        Arrays.sort(nums);
+        int max=nums[nums.length-1];
+        int[] base=new int[max+1];
+        for(int i=0;i<base.length-1;i++){
+            base[i]=i+1;
+        }
+        base[base.length-1]=max;
+        if(Arrays.equals(nums,base)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
