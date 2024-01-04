@@ -1,0 +1,21 @@
+class Solution {
+    public int maxWidthOfVerticalArea(int[][] points) {
+        int[] column = getColumn(points,0);
+        Arrays.sort(column);
+        int ans=0;
+        for(int j=0;j<column.length-1;j++){
+            int diff=column[j+1]-column[j];
+            ans=Math.max(diff,ans);
+        }
+        return ans;
+    }
+
+    public static int[] getColumn(int[][] array2D, int columnIndex) {
+        int[] column = new int[array2D.length];
+        for (int i = 0; i < array2D.length; i++) {
+            column[i] = array2D[i][columnIndex];
+        }
+        return column;
+    }
+
+}
