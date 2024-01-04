@@ -1,0 +1,19 @@
+class Solution {
+    public int maximumUnits(int[][] boxTypes, int truckSize) {
+         Arrays.sort(boxTypes, (a, b) -> Integer.compare(b[1], a[1]));
+        int sum=0;
+        int sum1=0;
+        for(int i=0;i<boxTypes.length;i++){
+            int n=boxTypes[i][0];
+            sum=sum+n;
+            if(sum<=truckSize){
+                sum1=sum1+(boxTypes[i][0]*boxTypes[i][1]);
+            }
+            else{
+                sum1=sum1+((truckSize-sum+n)*boxTypes[i][1]);
+                break;
+            }
+        }
+        return sum1;
+    }
+}
