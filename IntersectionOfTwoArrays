@@ -1,0 +1,30 @@
+import java.util.*;
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        int n=nums1.length;
+        int m=nums2.length;
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        if(n>m){
+            for(int i=0;i<m;i++){
+                for(int j=0;j<n;j++){
+                    if(nums2[i]==nums1[j] && ans.contains(nums2[i])==false){
+                        ans.add(nums2[i]);
+                        break;
+                    }
+                }
+            }
+        }
+        else{
+            for(int i=0;i<n;i++){
+                for(int j=0;j<m;j++){
+                    if(nums2[j]==nums1[i] && ans.contains(nums1[i])==false){
+                        ans.add(nums1[i]);
+                        break;
+                    }
+                }
+            }
+        }
+        int[] arr = ans.stream().mapToInt(i -> i).toArray();
+        return arr;
+    }
+}
