@@ -1,0 +1,19 @@
+class Solution {
+    public int arrayNesting(int[] nums) {
+         Set<Integer> visited = new HashSet<>();
+        int length = 0;
+        for (int num : nums) {
+            if (!visited.contains(num)) {
+                int curr= num;
+                int currLength = 0;
+                while (!visited.contains(curr)) {
+                    visited.add(curr);
+                    curr = nums[curr];
+                    currLength++;
+                }
+                length = Math.max(length, currLength);
+            }
+        }
+        return length;
+    }
+}
