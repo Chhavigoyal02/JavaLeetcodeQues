@@ -1,0 +1,34 @@
+class Solution {
+    public String getSmallestString(String s, int k) {
+        char[] t = new char[s.length()];
+        int[] kWrapper = new int[]{k};
+        for (int i = 0; i < s.length(); i++) {
+            char[] adjusted = adjustCharacter(s.charAt(i), kWrapper);
+            t[i] = adjusted[0];
+            kWrapper[0] = adjusted[1];
+            if (kWrapper[0] == 0) {
+                System.arraycopy(s.toCharArray(), i + 1, t, i + 1, s.length() - i - 1);
+                break;
+            }
+        }
+        return new String(t); 
+    }
+    private static int minDistanceToA(char ch) {
+            int directDistance = ch - 'a';
+            int cyclicDistance = 'z' - ch + 1;
+            return Math.min(directDistance, cyclicDistance);
+    }
+    
+    private static char[] adjustCharacter(char ch, int[] k) {
+        if (ch == 'a') return new char[]{ch, (char) k[0]};
+        int distanceToA = minDistanceToA(ch);
+        if (distanceToA <= k[0]) {
+            k[0] -= distanceToA;
+            return new char[]{'a', (char) k[0]};
+        } 
+        else {
+            if (ch - k[0] >= 'a') return new char[]{(char)(ch - k[0]), 0};
+            else return new char[]{(char)('z' - (k[0] - (ch - 'a')) + 1), 0};
+        }
+    }
+}
