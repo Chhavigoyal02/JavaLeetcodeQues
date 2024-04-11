@@ -1,0 +1,10 @@
+class Solution {
+    public String removeOccurrences(String s, String part) {
+        return remove(s,part);
+    }
+    public static String remove(String ques,String part){
+        int index = ques.indexOf(part); 
+        if(index==-1) return ques;
+        return remove(ques.substring(0, index) + ques.substring(index + part.length()),part);
+    }
+}
