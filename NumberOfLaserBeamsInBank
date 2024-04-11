@@ -1,0 +1,22 @@
+class Solution {
+    public int numberOfBeams(String[] bank) {
+        int[] devicesPerRow = new int[bank.length];
+        int totalBeams = 0;
+        for (int i = 0; i < bank.length; i++) {
+            String row = bank[i];
+            int count = 0;
+            for (char c : row.toCharArray()) {
+                if (c == '1') count++;
+            }
+            devicesPerRow[i] = count;
+        }
+        int lCount=0;
+        for (int devices : devicesPerRow) {
+            if (devices > 0) { 
+                if (lCount > 0) totalBeams += lCount * devices;
+                lCount = devices;
+            }
+        }
+        return totalBeams;
+    }
+}
