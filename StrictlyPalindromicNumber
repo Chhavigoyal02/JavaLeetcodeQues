@@ -1,0 +1,28 @@
+class Solution {
+    public boolean isStrictlyPalindromic(int n) {
+        for(int i=2;i<=n-2;i++){
+            if(ispal(rep(n,i))==false) return false;
+        }
+        return true;
+    }
+    public static boolean ispal(int n){
+        int temp=n;
+        int rev=0;
+        while(temp>0){
+            int x=temp%10;
+            rev=rev*10+x;
+            temp=temp/10;
+        }
+        return rev==n;
+    }
+    public static int rep(int n,int a){
+        int sum=0,mul=1;
+		while(n>0) {
+			int rem = n%a;
+			sum = sum + rem*mul;
+			n=n/a;
+			mul = mul * 10;
+		}
+        return sum;
+    }
+}
