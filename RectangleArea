@@ -1,0 +1,15 @@
+class Solution {
+    public int computeArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int area1=(ax2-ax1)*(ay2-ay1);
+        int area2=(bx2-bx1)*(by2-by1);
+        int commonX1 = Math.max(ax1, bx1);
+        int commonY1 = Math.max(ay1, by1);
+        int commonX2 = Math.min(ax2, bx2);
+        int commonY2 = Math.min(ay2, by2);
+        int common = 0;
+        if (commonX2 > commonX1 && commonY2 > commonY1) {
+            common = (commonX2 - commonX1) * (commonY2 - commonY1);
+        }
+        return area1 + area2 - common;
+    }
+}
