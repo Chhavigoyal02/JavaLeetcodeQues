@@ -1,0 +1,33 @@
+class Solution {
+    public List<List<Integer>> findMatrix(int[] nums) {
+        Arrays.sort(nums);
+        reverse(nums);
+        List<List<Integer>> result = new ArrayList<>();
+        for (int num : nums) {
+            boolean added = false;
+            for (List<Integer> row : result) {
+                if (!row.contains(num)) {
+                    row.add(num);
+                    added = true;
+                    break;
+                }
+            }
+            if (!added) {
+                List<Integer> newRow = new ArrayList<>();
+                newRow.add(num);
+                result.add(newRow);
+            }
+        }
+        return result;
+    }
+     public static void reverse(int[] nums) {
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left++;
+            right--;
+        }
+    }
+}
