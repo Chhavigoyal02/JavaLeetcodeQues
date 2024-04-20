@@ -1,0 +1,15 @@
+class Solution {
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        int n = rooms.size();
+        Set<Integer> visited = new HashSet<>();
+         rec(0, rooms, visited);
+        return visited.size() == n;
+    }
+    public void rec(int room, List<List<Integer>> rooms, Set<Integer> visited) {
+        if (visited.contains(room)) return;
+        visited.add(room);
+        for (int i=0;i<rooms.get(room).size();i++) {
+            rec(rooms.get(room).get(i), rooms, visited);
+        }
+    }
+}
