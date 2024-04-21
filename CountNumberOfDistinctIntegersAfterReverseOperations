@@ -1,0 +1,29 @@
+class Solution {
+    public int countDistinctIntegers(int[] nums) {
+        int n=nums.length;
+        int[] joint=new int[2*n];
+        for(int i=0;i<n;i++){
+            joint[i]=nums[i];
+        }
+        for(int i=n;i<2*n;i++){
+            joint[i]=reverse(nums[i-n]);
+        }
+        return countDistinct(joint);
+    }
+    public static int reverse(int num){
+        int rev=0;
+        while(num>0){
+            int x=num%10;
+            rev=rev*10+x;
+            num=num/10;
+        }
+        return rev;
+    }
+     public static int countDistinct(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+        return set.size();
+    }
+}
