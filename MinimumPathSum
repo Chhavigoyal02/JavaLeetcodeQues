@@ -1,0 +1,17 @@
+import java.util.*;
+class Solution {
+    public int minPathSum(int[][] grid) {
+         Integer[][] memo = new Integer[grid.length][grid[0].length];
+        return rec(0,0,grid.length,grid[0].length,grid,memo);
+    }
+    public static int rec(int curr_r,int curr_c,int n,int m,int[][] grid,Integer[][] memo){
+        if(curr_r==n-1 && curr_c==m-1) return grid[curr_r][curr_c];
+        if (memo[curr_r][curr_c] != null) return memo[curr_r][curr_c];
+        int down = Integer.MAX_VALUE;
+        if(curr_r<n-1) down = rec(curr_r+1,curr_c,n,m,grid,memo);
+        int right =Integer.MAX_VALUE;
+        if(curr_c<m-1) right = rec(curr_r,curr_c+1,n,m,grid,memo);
+        memo[curr_r][curr_c] = grid[curr_r][curr_c] + Math.min(down, right);
+        return memo[curr_r][curr_c];
+    }
+}
