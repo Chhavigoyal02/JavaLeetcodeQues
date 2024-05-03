@@ -1,0 +1,26 @@
+class Solution {
+    public int kthSmallest(int[][] matrix, int k) {
+        int m=matrix.length;
+        int n=matrix[0].length;
+        int[] single=new int[m*n];
+        int c=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                single[c]=matrix[i][j];
+                c++;
+            }
+        }
+        int left = single[0];
+        int right = single[m*n-1];
+        while (left<right) {
+            int mid=left+(right-left)/2;
+            int count=0;
+            for (int num:single){
+                if (num<=mid) count++;
+            }
+            if (count<k) left=mid+1; 
+            else right=mid;
+        }
+        return left;
+    }
+}
