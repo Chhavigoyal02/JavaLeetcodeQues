@@ -1,0 +1,25 @@
+class Solution {
+    public int getKth(int lo, int hi, int k) {
+        Integer[] nums = new Integer[hi - lo + 1];
+        for(int i=lo;i<=hi;i++){
+            nums[i-lo]=i;
+        }
+         Arrays.sort(nums, (a, b) -> {
+            int powA=pow(a);
+            int powB=pow(b);
+            if (powA!=powB) return Integer.compare(powA, powB);
+            else return Integer.compare(a, b);
+        });
+        return nums[k - 1];
+    }
+    public static int pow(int num){
+        if(num==1) return 1;
+        int count=0;
+        while(num>1){
+            if(num%2==0) num=num/2;
+            else num=num*3+1;
+            count++;
+        }
+        return count;
+    }
+}
