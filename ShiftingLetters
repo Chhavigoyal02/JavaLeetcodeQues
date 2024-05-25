@@ -1,0 +1,19 @@
+class Solution {
+    public String shiftingLetters(String s, int[] shifts) {
+        String ans="";
+        long sum=0;
+        for(int i=s.length()-1;i>=0;i--){
+            sum+=shifts[i];
+            sum%=26;
+            ans=ans+(char)((s.charAt(i)-'a'+sum)%26+'a');
+        }
+        return rev(ans);
+    }
+    public static String rev(String s){
+        String ans="";
+        for(int i=s.length()-1;i>=0;i--){
+            ans+=s.charAt(i);
+        }
+        return ans;
+    }
+}
