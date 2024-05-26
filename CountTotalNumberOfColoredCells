@@ -1,0 +1,12 @@
+class Solution {
+    public long coloredCells(int n) {
+        if(n==1) return 1;
+        long x=1;
+        long a=4;
+        for(long i=2;i<=n;i++){
+            x=x+a;
+            a=a+4;
+        }
+        return x;
+    }
+}
