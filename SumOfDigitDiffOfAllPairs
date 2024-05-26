@@ -1,0 +1,23 @@
+class Solution {
+    public long sumDigitDifferences(int[] nums) {
+        int n = nums.length;
+        int numDigits = String.valueOf(nums[0]).length();
+        int[][] digitCount = new int[numDigits][10];
+        for (int num : nums) {
+            for (int pos = 0; pos < numDigits; pos++) {
+                int digit = num % 10;
+                digitCount[pos][digit]++;
+                num /= 10;
+            }
+        }
+        long totalDifferences = 0;
+        for (int pos = 0; pos < numDigits; pos++) {
+            for (int d1 = 0; d1 < 10; d1++) {
+                for (int d2 = d1 + 1; d2 < 10; d2++) {
+                    totalDifferences += digitCount[pos][d1] * digitCount[pos][d2];
+                }
+            }
+        }
+        return totalDifferences;
+    }
+}
