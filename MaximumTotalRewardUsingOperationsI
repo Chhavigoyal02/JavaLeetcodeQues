@@ -1,0 +1,24 @@
+class Solution {
+    public int maxTotalReward(int[] rewardValues) {
+        Arrays.sort(rewardValues);
+        int n=rewardValues.length;
+        int[] m=new int[Arrays.stream(rewardValues).sum() + 1];
+        Arrays.fill(m,-1);
+        return dfs(rewardValues,0,0,m);
+    }
+    private static int dfs(int[] rewardValues, int idx, int currReward, int[] m) {
+        if (idx==rewardValues.length) return currReward;
+        if (m[currReward]!=-1) return m[currReward];
+        if (rewardValues[idx]>currReward) {
+            int include = dfs(rewardValues, idx + 1, rewardValues[idx] + currReward, m);
+            int skip = dfs(rewardValues, idx + 1, currReward, m);
+            m[currReward]=Math.max(include, skip);
+            return m[currReward];
+        } 
+        else {
+            int result = dfs(rewardValues, idx + 1, currReward, m);
+            m[currReward] = result;
+            return result;
+        }
+    }
+}
