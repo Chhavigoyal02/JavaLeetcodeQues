@@ -1,0 +1,25 @@
+class Solution {
+    public int nthUglyNumber(int n) {
+        int[] ugly=new int[n];
+        ugly[0]=1;
+        int i2=0,i3=0,i5=0;
+        int f2=2,f3=3,f5=5;
+        for (int i=1;i<n;i++) {
+            int nextUgly=Math.min(f2, Math.min(f3,f5));
+            ugly[i]=nextUgly;
+            if (nextUgly==f2) {
+                i2++;
+                f2=ugly[i2]*2;
+            }
+            if (nextUgly==f3) {
+                i3++;
+                f3=ugly[i3]*3;
+            }
+            if (nextUgly==f5) {
+                i5++;
+                f5=ugly[i5]*5;
+            }
+        }
+        return ugly[n - 1];
+    }
+}
