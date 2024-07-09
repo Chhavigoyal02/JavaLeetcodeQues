@@ -1,0 +1,71 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int x) {
+        val = x;
+        left = null;
+        right = null;
+    }
+}
+class Solution {
+    void markParents(TreeNode root, HashMap<TreeNode, TreeNode>parentTrack, TreeNode target) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.poll();
+            if (current.left != null) {
+                parentTrack.put(current.left, current);
+                queue.offer(current.left);
+            }
+            if (current.right != null) {
+                parentTrack.put(current.right, current);
+                queue.offer(current.right);
+            }
+        }
+    }
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        HashMap<TreeNode, TreeNode> parentTrack = new HashMap<>();
+        markParents(root, parentTrack, root);
+        HashMap<TreeNode, Boolean> visited = new HashMap<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(target);
+        visited.put(target,true);
+        int currLevel = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            if (currLevel++ == k) break;
+            for (int i = 0; i < size; i++) {
+                TreeNode current = queue.poll();
+                if (current.left != null && !visited.containsKey(current.left)) {
+                    queue.add(current.left);
+                    visited.put(current.left, true);
+                }
+                if (current.right != null && !visited.containsKey(current.right)) {
+                    queue.add(current.right);
+                    visited.put(current.right, true);
+                }
+                if (parentTrack.containsKey(current) && !visited.containsKey(parentTrack.get(current))) {
+                    queue.add(parentTrack.get(current));
+                    visited.put(parentTrack.get(current), true);
+                }
+            }
+        }
+        List<Integer> result = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.poll();
+            result.add(current.val);
+        }
+        return result;
+    }
+}
