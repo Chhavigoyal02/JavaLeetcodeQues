@@ -1,0 +1,17 @@
+class Solution {
+    public int[] sumEvenAfterQueries(int[] nums, int[][] queries) {
+        int[] result = new int[queries.length];
+        int sum=Arrays.stream(nums).filter(n->n%2==0).sum();
+        for(int i=0;i<queries.length;i++){
+            int val=queries[i][0];
+            int index=queries[i][1];
+            int old=nums[index];
+            if(old%2==0) sum-=old;
+            nums[index]+=val;
+            int newVal=nums[index];
+            if(newVal%2==0) sum+=newVal;
+            result[i]=sum;
+        }
+        return result;
+    }
+}
