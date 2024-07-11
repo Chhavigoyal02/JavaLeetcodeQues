@@ -1,0 +1,11 @@
+class Solution {
+    public int minOperations(int[] nums, int k) {
+        int curr=0;
+        for(int i=0;i<nums.length;i++){
+            curr^=nums[i];
+        }
+        int target=curr^k;
+        int ans=Integer.bitCount(target);
+        return ans;
+    }
+}
