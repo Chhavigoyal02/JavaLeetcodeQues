@@ -13,3 +13,33 @@ class Solution {
         return max;
     }
 }
+
+or 
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if(s.length()==0) return 0;
+        int winStart=0;
+        int winEnd=0;
+        int n=s.length();
+        // HashSet<Character> set=new HashSet<>();
+        HashMap<Character,Integer> map=new HashMap<>();
+        int maxLen=Integer.MIN_VALUE;
+        while(winEnd<n){
+            char ch=s.charAt(winEnd);
+            // if(set.contains(ch)){
+            if(map.containsKey(ch) && map.get(ch)>=winStart){
+                // while(winStart<winEnd && set.contains(ch)){
+                //     set.remove(s.charAt(winStart));
+                //     winStart++;
+                // }
+                winStart=map.get(ch)+1;
+            }
+            // set.add(ch);
+            map.put(ch,winEnd);
+            maxLen=Math.max(maxLen,winEnd-winStart+1);
+            winEnd++;
+        }
+        return maxLen;
+    }
+}
